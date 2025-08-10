@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class TrafficManagementSystem {
+    private static class TrafficLight {
+        String location;
+        String state;
+
+        TrafficLight(String location) {
+            this.location = location;
+            this.state = "RED";
+        }
+
+        void changeState(String newState) {
+            state = newState;
+            System.out.println("Traffic light at " + location + " is now " + state);
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        Scanner sc = new Scanner(System.in);
+
+        // Create traffic lights for simulation
+        List<TrafficLight> lights = new ArrayList<>();
+        lights.add(new TrafficLight("Crossroad A"));
+        lights.add(new TrafficLight("Crossroad B"));
+        lights.add(new TrafficLight("Crossroad C"));
+
+        System.out.println("=== Traffic Management System Simulation ===");
+        System.out.println("Press ENTER to start cycle. Press Ctrl+C to stop.");
+
+        sc.nextLine();
+
+        // Simple loop to simulate traffic light changes
+        String[] states = {"GREEN", "YELLOW", "RED"};
+
+        while (true) {
+            for (TrafficLight light : lights) {
+                for (String state : states) {
+                    light.changeState(state);
+                    Thread.sleep(2000); // Wait 2 seconds
+                }
+            }
+        }
+    }
+}
